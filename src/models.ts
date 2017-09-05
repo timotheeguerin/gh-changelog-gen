@@ -21,7 +21,7 @@ export interface Issue {
 }
 
 export interface MillestoneChangelog {
-    name: string;
+    millestone: Millestone;
     labels: string[];
     issues: { [key: string]: Issue[] };
 }

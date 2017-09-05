@@ -10,7 +10,7 @@ class PrettyFormatter extends ChangelogFormatter {
         const paddingLeft = Math.floor((separatorLength - changelog.name.length) / 2);
         const lines = [
             separator,
-            " ".repeat(paddingLeft) + changelog.name,
+            " ".repeat(paddingLeft) + changelog.millestone.title,
             separator,
         ];
         for (const label of changelog.labels) {
@@ -27,7 +27,22 @@ class PrettyFormatter extends ChangelogFormatter {
 exports.PrettyFormatter = PrettyFormatter;
 class MarkdownFormatter extends ChangelogFormatter {
     format(changelog) {
-        return "";
+        const lines = [
+            `# ${changelog.millestone.title}`,
+            `[All items](${changelog.millestone.html_url}?closed=1)`,
+        ];
+        for (const label of changelog.labels) {
+            lines.push("");
+            lines.push(`### ${label}:`);
+            lines.push("");
+            for (const issue of changelog.issues[label]) {
+                lines.push(`* ${this._issueChangelogEntry(issue)}`);
+            }
+        }
+        return lines.join("\n");
+    }
+    _issueChangelogEntry(issue) {
+        return `${issue.title} [\\#${issue.number})](${issue.html_url})`;
     }
 }
 exports.MarkdownFormatter = MarkdownFormatter;

@@ -42,7 +42,7 @@ function getChangelog(repo, millestone, labels) {
         const issues = utils_1.filterPullRequest(issuesAndPrs);
         const groupedIssues = utils_1.groupByLabels(issues, labels);
         return {
-            name: millestone.title,
+            millestone: millestone,
             labels: ["feature", "bug", "other"],
             issues: groupedIssues,
         };

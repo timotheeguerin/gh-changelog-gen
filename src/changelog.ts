@@ -42,7 +42,7 @@ export async function getChangelog(repo: string, millestone: Millestone, labels:
     const issues = filterPullRequest(issuesAndPrs);
     const groupedIssues = groupByLabels(issues, labels);
     return {
-        name: millestone.title,
+        millestone: millestone,
         labels: ["feature", "bug", "other"],
         issues: groupedIssues,
     }
