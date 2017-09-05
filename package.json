@@ -1,10 +1,10 @@
 {
-  "name": "github-changelog",
+  "name": "github-changelog-gen",
   "version": "0.1.0",
   "description": "Utility to generate changelog from a github millestone",
   "main": "build/index.js",
   "bin": {
-    "github-changelog": "./bin/github-changelog"
+    "gh-changelog-gen": "./bin/gh-changelog-gen"
   },
   "scripts": {
     "build": "tsc",
@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/timotheeguerin/github-changelog.git"
+    "url": "git+https://github.com/timotheeguerin/gh-changelog-gen.git"
   },
   "author": "timothee.guerin@outlook.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/timotheeguerin/github-changelog/issues"
+    "url": "https://github.com/timotheeguerin/gh-changelog-gen/issues"
   },
-  "homepage": "https://github.com/timotheeguerin/github-changelog#readme",
+  "homepage": "https://github.com/timotheeguerin/gh-changelog-gen#readme",
   "devDependencies": {
     "@types/node": "^8.0.26",
     "@types/node-fetch": "^1.6.7",
