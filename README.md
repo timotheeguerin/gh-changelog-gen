@@ -6,7 +6,7 @@ Generate a changelog from a github milestone grouping issues using tags.
 ## Install
 
 ```bash
-npm install gh-changelog-generator
+npm install -g gh-changelog-generator
 ```
 
 ## Usage
