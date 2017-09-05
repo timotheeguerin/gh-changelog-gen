@@ -42,7 +42,7 @@ function hasLabel(issue, label) {
 }
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
-        const issuesAndPrs = yield github_api_1.listMillestoneIssues(repo, 7);
+        const issuesAndPrs = yield github_api_1.listMilestoneIssues(repo, 7);
         const issues = filterPullRequest(issuesAndPrs);
         const groupedIssues = orderByLabels(issues, ["feature", "bug"]);
         const changelog = {

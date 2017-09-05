@@ -8,15 +8,16 @@ export function issuesUrl(repo: string) {
     return `${repoUrl(repo)}/issues`;
 }
 
-export function millestonesUrl(repo: string) {
+export function milestonesUrl(repo: string) {
     return `${repoUrl(repo)}/milestones`;
 }
 
-export function millestoneUrl(repo: string, millestone: number) {
-    return `${repoUrl(repo)}/milestones/${millestone}`;
+export function milestoneUrl(repo: string, milestone: number) {
+    return `${repoUrl(repo)}/milestones/${milestone}`;
 }
 
-export function millestoneIssuesUrl(repo: string, millestone: string|number) {
-    const query = `millestone=${millestone}&state=all`
+export function milestoneIssuesUrl(repo: string, milestone: string|number) {
+    const query = `milestone=${milestone}&state=all`
+    console.log("url",  `${issuesUrl(repo)}?${query}`);
     return `${issuesUrl(repo)}?${query}`;
 }

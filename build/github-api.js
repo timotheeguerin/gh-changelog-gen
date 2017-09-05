@@ -18,13 +18,15 @@ function get(url) {
     });
 }
 exports.get = get;
-function getMillestone(repo, number) {
+function getMilestone(repo, number) {
     return __awaiter(this, void 0, void 0, function* () {
-        return get(github_urls_1.millestoneUrl(repo, number));
+        return yield get(github_urls_1.milestoneUrl(repo, number));
     });
 }
-exports.getMillestone = getMillestone;
-function listMillestoneIssues(repo, millestone) {
-    return get(github_urls_1.millestoneIssuesUrl(repo, millestone));
+exports.getMilestone = getMilestone;
+function listMilestoneIssues(repo, milestone) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return yield get(github_urls_1.milestoneIssuesUrl(repo, milestone));
+    });
 }
-exports.listMillestoneIssues = listMillestoneIssues;
+exports.listMilestoneIssues = listMilestoneIssues;

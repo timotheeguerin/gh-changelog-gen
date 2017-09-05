@@ -20,13 +20,13 @@ export interface Issue {
     pull_request: any;
 }
 
-export interface MillestoneChangelog {
-    millestone: Millestone;
+export interface MilestoneChangelog {
+    milestone: Milestone;
     labels: string[];
     issues: { [key: string]: Issue[] };
 }
 
-export interface Millestone {
+export interface Milestone {
     id: number;
     number: number;
     title: string;

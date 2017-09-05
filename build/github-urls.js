@@ -9,16 +9,17 @@ function issuesUrl(repo) {
     return `${repoUrl(repo)}/issues`;
 }
 exports.issuesUrl = issuesUrl;
-function millestonesUrl(repo) {
+function milestonesUrl(repo) {
     return `${repoUrl(repo)}/milestones`;
 }
-exports.millestonesUrl = millestonesUrl;
-function millestoneUrl(repo, millestone) {
-    return `${repoUrl(repo)}/milestones/${millestone}`;
+exports.milestonesUrl = milestonesUrl;
+function milestoneUrl(repo, milestone) {
+    return `${repoUrl(repo)}/milestones/${milestone}`;
 }
-exports.millestoneUrl = millestoneUrl;
-function millestoneIssuesUrl(repo, millestone) {
-    const query = `millestone=${millestone}&state=all`;
+exports.milestoneUrl = milestoneUrl;
+function milestoneIssuesUrl(repo, milestone) {
+    const query = `milestone=${milestone}&state=all`;
+    console.log("url", `${issuesUrl(repo)}?${query}`);
     return `${issuesUrl(repo)}?${query}`;
 }
-exports.millestoneIssuesUrl = millestoneIssuesUrl;
+exports.milestoneIssuesUrl = milestoneIssuesUrl;

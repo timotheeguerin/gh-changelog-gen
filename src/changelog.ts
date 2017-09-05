@@ -1,6 +1,6 @@
 
-import { MillestoneChangelog, Millestone } from "./models";
-import { listMillestoneIssues, getMillestone } from "./github-api";
+import { MilestoneChangelog, Milestone } from "./models";
+import { listMilestoneIssues, getMilestone } from "./github-api";
 import { ChangelogFormatter, PrettyFormatter, MarkdownFormatter } from "./formatter";
 import { filterPullRequest, groupByLabels } from "./utils";
 
@@ -8,7 +8,7 @@ import { filterPullRequest, groupByLabels } from "./utils";
 
 export interface ChangelogRenderOptions {
     repo: string;
-    millestone: number;
+    milestone: number;
     labels?: string;
     formatter?: string;
 }
@@ -37,12 +37,12 @@ export function getLabels(labels?: string | string[]): string[] {
 }
 
 
-export async function getChangelog(repo: string, millestone: Millestone, labels: string[]): Promise<MillestoneChangelog> {
-    const issuesAndPrs = await listMillestoneIssues(repo, millestone.number);
+export async function getChangelog(repo: string, milestone: Milestone, labels: string[]): Promise<MilestoneChangelog> {
+    const issuesAndPrs = await listMilestoneIssues(repo, milestone.number);
     const issues = filterPullRequest(issuesAndPrs);
     const groupedIssues = groupByLabels(issues, labels);
     return {
-        millestone: millestone,
+        milestone: milestone,
         labels: ["feature", "bug", "other"],
         issues: groupedIssues,
     }
@@ -52,8 +52,8 @@ export async function renderChangelog(options: ChangelogRenderOptions) {
     const formatter = getFormatter(options.formatter);
     const labels = getLabels(options.labels);
     const repoName = options.repo;
-    const millestone = await getMillestone(repoName, options.millestone);
+    const milestone = await getMilestone(repoName, options.milestone);
 
-    const changelog = await getChangelog(repoName, millestone, labels);
+    const changelog = await getChangelog(repoName, milestone, labels);
     return formatter.format(changelog);
 }

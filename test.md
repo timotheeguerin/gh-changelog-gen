@@ -1,4 +1,4 @@
-getting uri https://api.github.com/repos/Azure/BatchLabs/issues?millestone=7&state=all
+getting uri https://api.github.com/repos/Azure/BatchLabs/issues?milestone=7&state=all
 *  Improve errors when loading task outputs [\#663)](https://github.com/Azure/BatchLabs/pull/663)
 *  Fix bugs related to the settings and remove dependency on electron-json-storage [\#662)](https://github.com/Azure/BatchLabs/pull/662)
 *  Profile settings throws an error for user settings [\#661)](https://github.com/Azure/BatchLabs/issues/661)

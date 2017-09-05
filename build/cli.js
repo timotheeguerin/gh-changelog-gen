@@ -17,18 +17,29 @@ function program() {
         .arguments("<milestone>")
         .option("-f, --formatter [formatter]", "Formatter for the changelog. [pretty,markdown]")
         .option("-l, --labels [labels]", "List of labels comma separated to group issues(feature,bug)")
-        .option("-r, --repo [repo]", "Full name of the repo(username/reponame)."
+        .option("-r, --repo <repo>", "Full name of the repo(username/reponame)."
         + "By default will try to get the repo of current directory if applicable");
 }
 exports.program = program;
+function checkValidOptions(options) {
+    if (!options.repo) {
+        console.log("You must provide a repository using the --repo option");
+        process.exit(2);
+    }
+    else if (options.args.length === 0) {
+        console.log("You must a milestone. gh-changelog-gen <milestone> ...");
+        process.exit(2);
+    }
+}
 function run(args) {
     return __awaiter(this, void 0, void 0, function* () {
         const options = program().parse(args);
+        checkValidOptions(options);
         const changelog = yield changelog_1.renderChangelog({
             repo: options.repo,
             labels: options.labels,
             formatter: options.formatter,
-            millestone: 7,
+            milestone: parseInt(options.args[0]),
         });
         console.log(changelog);
     });

@@ -1,7 +1,7 @@
 {
   "name": "github-changelog-gen",
   "version": "0.1.0",
-  "description": "Utility to generate changelog from a github millestone",
+  "description": "Utility to generate changelog from a github milestone",
   "main": "build/index.js",
   "bin": {
     "gh-changelog-gen": "./bin/gh-changelog-gen"
@@ -10,7 +10,8 @@
     "build": "tsc",
     "build-watch": "tsc --watch",
     "start": "npm run build -s && node build/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tslint": "tslint src/**/*.ts"
   },
   "repository": {
     "type": "git",

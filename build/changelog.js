@@ -36,13 +36,13 @@ function getLabels(labels) {
     }
 }
 exports.getLabels = getLabels;
-function getChangelog(repo, millestone, labels) {
+function getChangelog(repo, milestone, labels) {
     return __awaiter(this, void 0, void 0, function* () {
-        const issuesAndPrs = yield github_api_1.listMillestoneIssues(repo, millestone.number);
+        const issuesAndPrs = yield github_api_1.listMilestoneIssues(repo, milestone.number);
         const issues = utils_1.filterPullRequest(issuesAndPrs);
         const groupedIssues = utils_1.groupByLabels(issues, labels);
         return {
-            millestone: millestone,
+            milestone: milestone,
             labels: ["feature", "bug", "other"],
             issues: groupedIssues,
         };
@@ -54,8 +54,8 @@ function renderChangelog(options) {
         const formatter = getFormatter(options.formatter);
         const labels = getLabels(options.labels);
         const repoName = options.repo;
-        const millestone = yield github_api_1.getMillestone(repoName, options.millestone);
-        const changelog = yield getChangelog(repoName, millestone, labels);
+        const milestone = yield github_api_1.getMilestone(repoName, options.milestone);
+        const changelog = yield getChangelog(repoName, milestone, labels);
         return formatter.format(changelog);
     });
 }

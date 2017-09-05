@@ -1,18 +1,18 @@
-import { MillestoneChangelog, Issue } from "./models";
+import { MilestoneChangelog, Issue } from "./models";
 
 const separatorLength = 60;
 const separator = "=".repeat(separatorLength);
 
 export abstract class ChangelogFormatter {
-    public abstract format(changelog: MillestoneChangelog): string;
+    public abstract format(changelog: MilestoneChangelog): string;
 }
 
 export class PrettyFormatter extends ChangelogFormatter {
-    public format(changelog: MillestoneChangelog): string {
-        const paddingLeft = Math.floor((separatorLength - changelog.name.length) / 2);
+    public format(changelog: MilestoneChangelog): string {
+        const paddingLeft = Math.floor((separatorLength - changelog.milestone.title.length) / 2);
         const lines = [
             separator,
-            " ".repeat(paddingLeft) + changelog.millestone.title,
+            " ".repeat(paddingLeft) + changelog.milestone.title,
             separator,
         ];
         for (const label of changelog.labels) {
@@ -29,10 +29,10 @@ export class PrettyFormatter extends ChangelogFormatter {
 }
 
 export class MarkdownFormatter extends ChangelogFormatter {
-    public format(changelog: MillestoneChangelog) {
+    public format(changelog: MilestoneChangelog) {
         const lines = [
-            `# ${changelog.millestone.title}`,
-            `[All items](${changelog.millestone.html_url}?closed=1)`,
+            `# ${changelog.milestone.title}`,
+            `[All items](${changelog.milestone.html_url}?closed=1)`,
         ]
 
         for (const label of changelog.labels) {
