@@ -1,14 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const separator = "=".repeat(60);
+const separatorLength = 60;
+const separator = "=".repeat(separatorLength);
 class ChangelogFormatter {
 }
 exports.ChangelogFormatter = ChangelogFormatter;
 class PrettyFormatter extends ChangelogFormatter {
     format(changelog) {
+        const paddingLeft = Math.floor((separatorLength - changelog.name.length) / 2);
         const lines = [
             separator,
-            changelog.name,
+            " ".repeat(paddingLeft) + changelog.name,
             separator,
         ];
         for (const label of changelog.labels) {

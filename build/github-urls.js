@@ -9,6 +9,14 @@ function issuesUrl(repo) {
     return `${repoUrl(repo)}/issues`;
 }
 exports.issuesUrl = issuesUrl;
+function millestonesUrl(repo) {
+    return `${repoUrl(repo)}/milestones`;
+}
+exports.millestonesUrl = millestonesUrl;
+function millestoneUrl(repo, millestone) {
+    return `${repoUrl(repo)}/milestones/${millestone}`;
+}
+exports.millestoneUrl = millestoneUrl;
 function millestoneIssuesUrl(repo, millestone) {
     const query = `millestone=${millestone}&state=all`;
     return `${issuesUrl(repo)}?${query}`;

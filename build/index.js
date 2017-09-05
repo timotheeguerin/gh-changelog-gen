@@ -6,4 +6,3 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./formatter"));
 __export(require("./models"));
 __export(require("./changelog"));
-run();

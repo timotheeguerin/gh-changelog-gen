@@ -12,13 +12,18 @@ const node_fetch_1 = require("node-fetch");
 const github_urls_1 = require("./github-urls");
 function get(url) {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log("getting uri", url);
         const response = yield node_fetch_1.default(url);
         const data = response.json();
         return data;
     });
 }
 exports.get = get;
+function getMillestone(repo, number) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return get(github_urls_1.millestoneUrl(repo, number));
+    });
+}
+exports.getMillestone = getMillestone;
 function listMillestoneIssues(repo, millestone) {
     return get(github_urls_1.millestoneIssuesUrl(repo, millestone));
 }

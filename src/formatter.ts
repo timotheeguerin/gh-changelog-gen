@@ -1,6 +1,7 @@
 import { MillestoneChangelog } from "./models";
 
-const separator = "=".repeat(60);
+const separatorLength = 60;
+const separator = "=".repeat(separatorLength);
 
 export abstract class ChangelogFormatter {
     public abstract format(changelog: MillestoneChangelog): string;
@@ -8,9 +9,10 @@ export abstract class ChangelogFormatter {
 
 export class PrettyFormatter extends ChangelogFormatter {
     public format(changelog: MillestoneChangelog): string {
+        const paddingLeft = Math.floor((separatorLength - changelog.name.length) / 2);
         const lines = [
             separator,
-            changelog.name,
+            " ".repeat(paddingLeft) + changelog.name,
             separator,
         ];
         for (const label of changelog.labels) {

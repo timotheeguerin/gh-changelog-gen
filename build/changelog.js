@@ -9,45 +9,54 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const github_api_1 = require("./github-api");
-function orderByLabels(issues, labels) {
-    const map = {};
-    const others = [];
-    for (const label of labels) {
-        map[label] = [];
+const formatter_1 = require("./formatter");
+const utils_1 = require("./utils");
+function getFormatter(formatterName) {
+    const formatters = {
+        pretty: formatter_1.PrettyFormatter,
+        markdown: formatter_1.MarkdownFormatter,
+    };
+    if (formatterName && formatterName in formatters) {
+        return new formatters[formatterName]();
     }
-    for (const issue of issues) {
-        for (const label of labels) {
-            if (hasLabel(issue, label)) {
-                map[label].push(issue);
-                break;
-            }
-        }
-        others.push(issue);
+    else {
+        return new formatter_1.PrettyFormatter();
     }
-    map["other"] = others;
-    return map;
 }
-function hasLabel(issue, label) {
-    for (const issueLabel of issue.labels) {
-        if (issueLabel.name === label) {
-            return true;
-        }
+exports.getFormatter = getFormatter;
+function getLabels(labels) {
+    if (!labels) {
+        return ["feature", "bug"];
     }
-    return false;
+    else if (Array.isArray(labels)) {
+        return labels;
+    }
+    else {
+        return labels.split(",");
+    }
 }
-function filterPullRequest(issues) {
-    return issues.filter(x => !x.pull_request);
-}
-function getChangelog(repo, millestone) {
+exports.getLabels = getLabels;
+function getChangelog(repo, millestone, labels) {
     return __awaiter(this, void 0, void 0, function* () {
-        const issuesAndPrs = yield github_api_1.listMillestoneIssues(repo, 7);
-        const issues = filterPullRequest(issuesAndPrs);
-        const groupedIssues = orderByLabels(issues, ["feature", "bug"]);
+        const issuesAndPrs = yield github_api_1.listMillestoneIssues(repo, millestone.number);
+        const issues = utils_1.filterPullRequest(issuesAndPrs);
+        const groupedIssues = utils_1.groupByLabels(issues, labels);
         return {
-            name: "0.0.1",
+            name: millestone.title,
             labels: ["feature", "bug", "other"],
             issues: groupedIssues,
         };
     });
 }
 exports.getChangelog = getChangelog;
+function renderChangelog(options) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const formatter = getFormatter(options.formatter);
+        const labels = getLabels(options.labels);
+        const repoName = options.repo;
+        const millestone = yield github_api_1.getMillestone(repoName, options.millestone);
+        const changelog = yield getChangelog(repoName, millestone, labels);
+        return formatter.format(changelog);
+    });
+}
+exports.renderChangelog = renderChangelog;

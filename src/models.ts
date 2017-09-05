@@ -1,6 +1,6 @@
 export enum IssueState {
     open = "open",
-    closed =  "closed",
+    closed = "closed",
 }
 
 export interface Label {
@@ -23,5 +23,15 @@ export interface Issue {
 export interface MillestoneChangelog {
     name: string;
     labels: string[];
-    issues: {[key: string]: Issue[]};
+    issues: { [key: string]: Issue[] };
+}
+
+export interface Millestone {
+    id: number;
+    number: number;
+    title: string;
+    url: string;
+    state: IssueState;
+    description: string;
+    html_url: string;
 }

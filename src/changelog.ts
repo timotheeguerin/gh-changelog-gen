@@ -1,51 +1,59 @@
 
-import { MillestoneChangelog, Issue } from "./models";
-import { listMillestoneIssues } from "./github-api";
+import { MillestoneChangelog, Millestone } from "./models";
+import { listMillestoneIssues, getMillestone } from "./github-api";
+import { ChangelogFormatter, PrettyFormatter, MarkdownFormatter } from "./formatter";
+import { filterPullRequest, groupByLabels } from "./utils";
 
 
-function orderByLabels(issues: Issue[], labels: string[]): { [key: string]: Issue[] } {
-    const map = {};
-    const others: Issue[] = [];
-    for (const label of labels) {
-        map[label] = [];
-    }
 
-    for (const issue of issues) {
-        for (const label of labels) {
-            if (hasLabel(issue, label)) {
-                map[label].push(issue);
-                break;
-            }
-        }
-
-        others.push(issue);
-    }
-    map["other"] = others;
-
-    return map;
+export interface ChangelogRenderOptions {
+    repo: string;
+    millestone: number;
+    labels?: string;
+    formatter?: string;
 }
 
-function hasLabel(issue: Issue, label: string) {
-    for (const issueLabel of issue.labels) {
-        if (issueLabel.name === label) {
-            return true;
-        }
+export function getFormatter(formatterName?: string): ChangelogFormatter {
+    const formatters = {
+        pretty: PrettyFormatter,
+        markdown: MarkdownFormatter,
     }
-    return false;
+
+    if (formatterName && formatterName in formatters) {
+        return new formatters[formatterName]();
+    } else {
+        return new PrettyFormatter();
+    }
+}
+
+export function getLabels(labels?: string | string[]): string[] {
+    if (!labels) {
+        return ["feature", "bug"];
+    } else if (Array.isArray(labels)) {
+        return labels;
+    } else {
+        return labels.split(",");
+    }
 }
 
 
-function filterPullRequest(issues: Issue[]): Issue[] {
-    return issues.filter(x => !x.pull_request);
-}
-
-export async function getChangelog(repo: string, millestone: string): Promise<MillestoneChangelog> {
-    const issuesAndPrs = await listMillestoneIssues(repo, 7);
+export async function getChangelog(repo: string, millestone: Millestone, labels: string[]): Promise<MillestoneChangelog> {
+    const issuesAndPrs = await listMillestoneIssues(repo, millestone.number);
     const issues = filterPullRequest(issuesAndPrs);
-    const groupedIssues = orderByLabels(issues, ["feature", "bug"]);
+    const groupedIssues = groupByLabels(issues, labels);
     return {
-        name: "0.0.1",
+        name: millestone.title,
         labels: ["feature", "bug", "other"],
         issues: groupedIssues,
     }
+}
+
+export async function renderChangelog(options: ChangelogRenderOptions) {
+    const formatter = getFormatter(options.formatter);
+    const labels = getLabels(options.labels);
+    const repoName = options.repo;
+    const millestone = await getMillestone(repoName, options.millestone);
+
+    const changelog = await getChangelog(repoName, millestone, labels);
+    return formatter.format(changelog);
 }
