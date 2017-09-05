@@ -35,7 +35,6 @@ export function hasLabel(issue: Issue, label: string) {
     return false;
 }
 
-
 export function filterPullRequest(issues: Issue[]): Issue[] {
     return issues.filter(x => !x.pull_request);
 }

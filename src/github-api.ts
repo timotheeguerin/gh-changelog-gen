@@ -8,8 +8,8 @@ export async function get(url: string) {
     return data;
 }
 
-export async function getMilestone(repo: string, number: number): Promise<Milestone> {
-    return await get(milestoneUrl(repo, number)) as any;
+export async function getMilestone(repo: string, milestoneNumber: number): Promise<Milestone> {
+    return await get(milestoneUrl(repo, milestoneNumber)) as any;
 }
 
 export async function listMilestoneIssues(repo: string, milestone: string | number): Promise<Issue[]> {

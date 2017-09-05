@@ -1,9 +1,6 @@
 {
     "extends": "tslint:recommended",
     "defaultSeverity": "error",
-    "rulesDirectory": [
-      "node_modules/codelyzer"
-    ],
     "rules": {
       // TSLint override
       "no-this-assignment": [true, {"allow-destructuring": true}],
@@ -33,7 +30,6 @@
       "arrow-return-shorthand": [true],
       "ban": [
           true,
-          ["batchLabsApp", "debugCrash"], // Show a warning if the main window is being shown on start for debug purposes
           {"name": "fdescribe", "message": "Don't keep jasmine fit methods in the code."},
           {"name": "fit", "message": "Don't keep jasmine fit methods in the code."}
       ],
@@ -42,31 +38,10 @@
       "no-irregular-whitespace": true,
       "no-invalid-template-strings": true,
       "no-sparse-arrays": true,
-  
-      // Codelyzer rules(Angular2)
-      "directive-selector": [true, "attribute", "bl", "camelCase"],
-      "component-selector": [true, "element", "bl", "kebab-case"],
-      "use-input-property-decorator": true,
-      "use-output-property-decorator": true,
-      "use-host-property-decorator": true,
-      "no-attribute-parameter-decorator": true,
-      "no-input-rename": true,
-      "no-output-rename": true,
-      "no-forward-ref": true,
-      "use-life-cycle-interface": true,
-      "use-pipe-transform-interface": true,
-      "pipe-naming": [false, "camelCase", "bl"],
-      "component-class-suffix": true,
-      "directive-class-suffix": true,
-      "import-destructuring-spacing": true,
-      "invoke-injectable": true,
-      "no-shadowed-variable": false,
-      // TODO enable
-      "prefer-const": false
+      "prefer-const": true
     },
     "jsRules": {
       "object-literal-sort-keys": false,
       "trailing-comma": [false]
     }
   }
-  

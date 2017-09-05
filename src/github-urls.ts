@@ -16,8 +16,7 @@ export function milestoneUrl(repo: string, milestone: number) {
     return `${repoUrl(repo)}/milestones/${milestone}`;
 }
 
-export function milestoneIssuesUrl(repo: string, milestone: string|number) {
-    const query = `milestone=${milestone}&state=all`
-    console.log("url",  `${issuesUrl(repo)}?${query}`);
+export function milestoneIssuesUrl(repo: string, milestone: string | number) {
+    const query = `milestone=${milestone}&state=all`;
     return `${issuesUrl(repo)}?${query}`;
 }

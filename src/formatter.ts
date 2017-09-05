@@ -1,4 +1,4 @@
-import { MilestoneChangelog, Issue } from "./models";
+import { Issue, MilestoneChangelog } from "./models";
 
 const separatorLength = 60;
 const separator = "=".repeat(separatorLength);
@@ -21,7 +21,7 @@ export class PrettyFormatter extends ChangelogFormatter {
             lines.push("");
 
             for (const issue of changelog.issues[label]) {
-                lines.push(`  - ${issue.title} (#${issue.number})`)
+                lines.push(`  - ${issue.title} (#${issue.number})`);
             }
         }
         return lines.join("\n");
@@ -33,7 +33,7 @@ export class MarkdownFormatter extends ChangelogFormatter {
         const lines = [
             `# ${changelog.milestone.title}`,
             `[All items](${changelog.milestone.html_url}?closed=1)`,
-        ]
+        ];
 
         for (const label of changelog.labels) {
             lines.push("");
@@ -48,6 +48,6 @@ export class MarkdownFormatter extends ChangelogFormatter {
     }
 
     private _issueChangelogEntry(issue: Issue): string {
-        return `${issue.title} [\\#${issue.number})](${issue.html_url})`
+        return `${issue.title} [\\#${issue.number})](${issue.html_url})`;
     }
 }
