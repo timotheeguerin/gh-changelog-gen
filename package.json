@@ -1,0 +1,36 @@
+{
+  "name": "github-changelog",
+  "version": "0.1.0",
+  "description": "Utility to generate changelog from a github millestone",
+  "main": "build/index.js",
+  "bin": {
+    "github-changelog": "./bin/github-changelog"
+  },
+  "scripts": {
+    "build": "tsc",
+    "build-watch": "tsc --watch",
+    "start": "npm run build -s && node build/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timotheeguerin/github-changelog.git"
+  },
+  "author": "timothee.guerin@outlook.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/timotheeguerin/github-changelog/issues"
+  },
+  "homepage": "https://github.com/timotheeguerin/github-changelog#readme",
+  "devDependencies": {
+    "@types/node": "^8.0.26",
+    "@types/node-fetch": "^1.6.7",
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.2"
+  },
+  "dependencies": {
+    "@types/commander": "^2.9.2",
+    "commander": "^2.11.0",
+    "node-fetch": "^1.7.2"
+  }
+}
