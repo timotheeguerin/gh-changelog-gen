@@ -1,4 +1,6 @@
 # Github changelog generator
+[![Build Status](https://travis-ci.org/timotheeguerin/gh-changelog-gen.svg?branch=master)](https://travis-ci.org/timotheeguerin/gh-changelog-gen)
+
 Generate a changelog from a github milestone grouping issues using tags.
 
 ## Install
