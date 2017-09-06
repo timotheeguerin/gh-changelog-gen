@@ -48,6 +48,6 @@ export class MarkdownFormatter extends ChangelogFormatter {
     }
 
     private _issueChangelogEntry(issue: Issue): string {
-        return `${issue.title} [\\#${issue.number})](${issue.html_url})`;
+        return `${issue.title} [\\#${issue.number}](${issue.html_url})`;
     }
 }

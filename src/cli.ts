@@ -14,10 +14,10 @@ export function program() {
 
 function checkValidOptions(options) {
     if (!options.repo) {
-        process.stdout.write("You must provide a repository using the --repo option");
+        process.stdout.write("You must provide a repository using the --repo option\n");
         process.exit(2);
     } else if (options.args.length === 0) {
-        process.stdout.write("You must a milestone. gh-changelog-gen <milestone> ...");
+        process.stdout.write("You must a milestone. gh-changelog-gen <milestone> ...\n");
         process.exit(2);
     }
 }
@@ -31,6 +31,7 @@ export async function run(args: string[]) {
         milestone: parseInt(options.args[0], 10),
     });
     process.stdout.write(changelog);
+    process.stdout.write("\n");
 }
 
 run(process.argv).then(() => {
