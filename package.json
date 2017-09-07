@@ -1,0 +1,37 @@
+{
+  "name": "github-changelog-gen",
+  "version": "0.1.1",
+  "description": "Utility to generate changelog from a github milestone",
+  "main": "build/index.js",
+  "bin": {
+    "gh-changelog-gen": "./bin/gh-changelog-gen"
+  },
+  "scripts": {
+    "build": "tsc",
+    "build-watch": "tsc --watch",
+    "start": "npm run build -s && node build/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tslint": "tslint src/**/*.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timotheeguerin/gh-changelog-gen.git"
+  },
+  "author": "timothee.guerin@outlook.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/timotheeguerin/gh-changelog-gen/issues"
+  },
+  "homepage": "https://github.com/timotheeguerin/gh-changelog-gen#readme",
+  "devDependencies": {
+    "@types/node": "^8.0.26",
+    "@types/node-fetch": "^1.6.7",
+    "tslint": "~5.7.0",
+    "typescript": "^2.5.2"
+  },
+  "dependencies": {
+    "@types/commander": "^2.9.2",
+    "commander": "^2.11.0",
+    "node-fetch": "^1.7.2"
+  }
+}
