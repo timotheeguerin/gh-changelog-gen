@@ -37,6 +37,6 @@ export async function run(args: string[]) {
 run(process.argv).then(() => {
     process.exit(0);
 }).catch((e) => {
-    process.stderr.write("An error occurred", e);
+    process.stderr.write(`An error occurred ${e.message}\n`);
     process.exit(1);
 });
