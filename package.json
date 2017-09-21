@@ -1,6 +1,6 @@
 {
   "name": "github-changelog-gen",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Utility to generate changelog from a github milestone",
   "main": "build/index.js",
   "bin": {

@@ -6,26 +6,26 @@ Generate a changelog from a github milestone grouping issues using tags.
 ## Install
 
 ```bash
-npm install -g gh-changelog-generator
+npm install -g github-changelog-gen
 ```
 
 ## Usage
 
 ```bash
 # Basic(will use feature and bug for grouping labels)
-gh-changelog-generator <milestone> --repo=<repo>
+gh-changelog-gen <milestone> --repo=<repo>
 
 # Format markdown
-gh-changelog-generator <milestone> --repo=<repo> --formatter=markdown
+gh-changelog-gen <milestone> --repo=<repo> --formatter=markdown
 
 # Custom labels
-gh-changelog-generator <milestone> --repo=<repo> --labels=epic,critical
+gh-changelog-gen <milestone> --repo=<repo> --labels=epic,critical
 ```
 
 ## Example(Simple)
 Running the following command
 ```bash
-gh-changelog-generator 6 --repo=Azure/BatchLabs
+gh-changelog-gen 6 --repo=Azure/BatchLabs
 ```
 
 Generate the following
